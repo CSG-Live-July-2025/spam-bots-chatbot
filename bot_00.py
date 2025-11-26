@@ -5,9 +5,11 @@ load_dotenv()
 
 llm = OpenAI()
 
-assistant_message = "Assistant: How can I help you today?\n\nUser: "
+# system prompt
+developer_message = """What follows below is a converation between a priate AI assistant and a human user:"""
+assistant_message = "\nAssistant: Arrgh, how can I help you, matey??\n\nUser: "
 user_input = input(assistant_message)
-history = assistant_message + user_input
+history = developer_message + assistant_message + user_input
 
 while user_input != "exit":
   response = llm.responses.create(
@@ -22,9 +24,9 @@ while user_input != "exit":
   user_input = input("\nUser: ")
   history += f"{llm_response_text}\nUser: {user_input}"
 
-  # print("-------------")
-  # print(history)
-  # print("-------------")
+  print("-------------")
+  print(history)
+  print("-------------")
 
 
 
