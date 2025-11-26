@@ -5,18 +5,38 @@ load_dotenv()
 
 llm = OpenAI()
 
-user_input = input("Assistant: How can I help you today?\n\nUser: ")
+assistant_message = "Assistant: How can I help you today?\n\nUser: "
+user_input = input(assistant_message)
+history = assistant_message + user_input
 
 while user_input != "exit":
   response = llm.responses.create(
     model="gpt-4.1-mini",
     temperature=1,
-    input=user_input
+    input=history
   )
 
-  print(f"\nAssitant: {response.output_text}")
+  llm_response_text = f"\nAssitant: {response.output_text}"
+  print(llm_response_text)
 
   user_input = input("\nUser: ")
+  history += f"{llm_response_text}\nUser: {user_input}"
+
+  # print("-------------")
+  # print(history)
+  # print("-------------")
+
+
+
+
+
+
+
+
+
+
+
+
 
 # user_input = input("Share anything with me and I'll translate it to French: \n")
 
