@@ -5,13 +5,20 @@ load_dotenv()
 
 llm = OpenAI()
 
-assistant_message = "Arrgh, how can I help you, matey??"
+with open("flamehamster.md", "r", encoding="utf-8") as file:
+  documentation = file.read()
+
+assistant_message = "How can I help you today?"
 print(f"Assistant: {assistant_message}\n")
 user_input = input("User: ")
 history = [
-  {"role": "developer", "content": "You are an AI assistant who always talks like a pirate."},
-  {"role": "assistant", "content": assistant_message},
-  {"role": "user", "content": user_input}
+   {"role": "developer", "content": f"""You are an AI customer support
+   technician who is knowledgeable about software products created by
+   the company called GROSS. One such product is a web browser called
+   Flamehamster. You are to answer user queries below solely on
+   the following documentation: {documentation}"""},
+   {"role": "assistant", "content": assistant_message},
+   {"role": "user", "content": user_input},
 ]
 
 while user_input != "exit":
